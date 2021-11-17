@@ -13,8 +13,8 @@ class Help(commands.Cog):
                               description="Listing of all the available commands",
                               color=Color.blue()
                               )
-        embed.add_field(name="🎈 Miscellanous", value="🏓 $ping \n 🗯 $say <message>")
-        embed.add_field(name="🛡 Moderation", value="🚫 $ban <victim> <reason>\n ❌ $kick <victim> <reason> \n ⚠ $warn <victim> <reason>")
+        embed.add_field(name="🎈 Miscellanous", value="🏓 **$**ping \n 🗯 **$**say <message> \n ℹ **$**info (member)")
+        embed.add_field(name="🛡 Moderation", value="🚫 **$**ban <member> (reason)\n ❌ **$**kick <member> (reason) \n ⚠ **$**warn <victim> (reason)\n    **$**warns (member)")
         embed.set_footer(text=f"Damaki © 2021 | Sent by {ctx.author}", icon_url=ctx.author.avatar_url)
 
         await ctx.send(embed=embed)

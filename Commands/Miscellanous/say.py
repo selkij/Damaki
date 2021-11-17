@@ -7,6 +7,15 @@ class Say(commands.Cog):
 
     @commands.command()
     async def say(self, ctx, *msg):
-        await ctx.message.delete()
         msg = " ".join(msg)
-        await ctx.send(msg)
+
+        if "je suis bete" in msg.lower():
+            msg = "Ont sait."
+            await ctx.reply(msg)
+        else:
+            await ctx.message.delete()
+            await ctx.send(msg)
+
+        
+
+        
