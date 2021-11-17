@@ -8,6 +8,9 @@ from discord.ext import commands
 from Commands.Miscellanous.help import Help
 from Commands.Miscellanous.ping import Ping
 from Commands.Miscellanous.say import Say
+from Commands.Miscellanous.voice import Join, Leave
+from Commands.Moderation.info import Info
+from Commands.Moderation.kick import Kick
 from Commands.Moderation.warn import Warn, Warns
 
 load_dotenv('config.env')
@@ -32,6 +35,9 @@ bot.add_cog(Help(bot))
 bot.add_cog(Say(bot))
 bot.add_cog(Warn(bot, db))
 bot.add_cog(Warns(bot, db))
-
+bot.add_cog(Kick(bot))
+bot.add_cog(Info(bot))
+bot.add_cog(Join(bot))
+bot.add_cog(Leave(bot))
 
 bot.run(os.getenv('DISCORD_TOKEN'))
