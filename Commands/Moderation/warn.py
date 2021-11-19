@@ -37,7 +37,13 @@ class Warn(commands.Cog):
             warnId = int(warnIdSQL) + 1
 
             if warnId == 10:
-                warnId = 101
+                warnId = 99167239
+            elif warnId == 20:
+                warnId = 99167240
+            elif warnId == 30:
+                warnId = 99167241
+            elif warnId == 40:
+                warnId = 99167241
 
             warn_query = f"INSERT INTO warn (ID, userID, reason, date, moderator) VALUES ('{warnId}', '{memberId}','{reason}', '{datet}', '{moderator.id}')"
             cursor.execute(warn_query)
@@ -47,7 +53,7 @@ class Warn(commands.Cog):
             await ctx.send(f"> ✅ **{member.mention}** has been warned for `{reason}` by **{moderator}**", delete_after=5)
 
             warnedEmbed = discord.Embed(title="⚠ Warned ⚠", description=f"You got warned for `{reason}` by **{moderator}** in **{ctx.guild.name}**", color=0xE0BA50)
-            warnedEmbed.set_footer(text=f"Damaki © 2021 | Kicked by {moderator}", icon_url=member.avatar_url)
+            warnedEmbed.set_footer(text=f"Damaki © 2021 | Warned by {moderator}", icon_url=member.avatar_url)
             await member.send(embed=warnedEmbed)
 
             print(f"Warn command issued by {ctx.author} \nId: {ctx.author.id}  \nfor {member} Id: {memberId} \nReason: {reason}\nGuild: {ctx.guild.id}\n--------")
@@ -90,14 +96,13 @@ class Warns(commands.Cog):
             moderatorUser = await self.bot.fetch_user(warns[4])
 
             if warns[2] == "":
-                warnMessage += f"**{debounce}**.\n❓ Reason: `No Reason`\n🚨 Moderator: {moderatorUser} | 🌐 {warns[4]}\n\n"
+                warnMessage += f"**{debounce}**.\n > ❓ **Reason**: `No Reason`\n > 🚨 **Moderator**: {moderatorUser} | 🌐 **{warns[4]}**\n\n"
             else:
-                warnMessage += f"**{debounce}**.\n❓ Reason: `{warns[2]}`\n🚨 Moderator: {moderatorUser} | 🌐 {warns[4]}\n\n"
+                warnMessage += f"**{debounce}**.\n > ❓ **Reason**: `{warns[2]}`\n > 🚨 **Moderator**: {moderatorUser} | 🌐 **{warns[4]}**\n\n"
                 
             debounce += 1
 
         selfEmbed.add_field(name=f"Warn", value=warnMessage, inline=False)
-        selfEmbed.add_field(name=" ☢ Context Menu ☢", value="> ❌ Remove a warn \n > 🚮 Purge warns", inline=False)
         selfEmbed.set_footer(text=f"Damaki © 2021 | Sent by {ctx.author}", icon_url=ctx.author.avatar_url)
 
         await ctx.send(embed=selfEmbed)
@@ -122,21 +127,25 @@ class Warns(commands.Cog):
                 moderatorUser = await self.bot.fetch_user(warns[4])
 
                 if warns[2] == "":
-                    warnMessage += f"**{debounce}**.\n🙍‍♂️ Member: {warnedUser} | 🌐 {warns[1]}\n❓ Reason: `No Reason`\n🚨 Moderator: {moderatorUser} | 🌐 {warns[4]}\n\n"
+                    warnMessage += f"**{debounce}**.\n > 🙍‍♂️ **Member**: {warnedUser} | 🌐 **{warns[1]}**\n > ❓ **Reason**: `No Reason`\n > 🚨 **Moderator**: {moderatorUser} | 🌐 **{warns[4]}**\n\n"
                 else:
-                    warnMessage += f"**{debounce}**.\n🙍‍♂️ Member: {warnedUser} | 🌐 {warns[1]}\n❓ Reason: `{warns[2]}`\n🚨 Moderator: {moderatorUser} | 🌐 {warns[4]}\n\n"
+                    warnMessage += f"**{debounce}**.\n > 🙍‍♂️ **Member**: {warnedUser} | 🌐 **{warns[1]}**\n > ❓ **Reason**: `{warns[2]}`\n > 🚨 **Moderator**: {moderatorUser} | 🌐 **{warns[4]}**\n\n"
                 
                 debounce += 1
 
             selfEmbed.add_field(name=f"Warn", value=warnMessage)
-            selfEmbed.add_field(name=" ☢ Context Menu ☢", value="> ❌ Remove a warn \n > 🚮 Purge warns", inline=False)
             selfEmbed.set_footer(text=f"Damaki © 2021 | Sent by {ctx.author}", icon_url=ctx.author.avatar_url)
 
             sendEmbed = await ctx.send(embed=selfEmbed)
-            await sendEmbed.add_reaction("❌")
-            await sendEmbed.add_reaction("🚮")
+            await sendEmbed.add_reaction("◀")
+            await sendEmbed.add_reaction("▶")
 
             @commands.Cog.listener()
-            async def on_raw_reaction_add(self, playload):
-                if playload.message_id == ctx.message.id and playload.channel_id == ctx.message.id and playload.emoji.name == "❌":
+            async def on_reaction_add(self, playload):
+                message = playload.message
+                
+                if playload.emoji == "◀":
                     await ctx.send("test")
+            
+            
+

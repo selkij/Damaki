@@ -15,6 +15,9 @@ class Say(commands.Cog):
         else:
             await ctx.message.delete()
             await ctx.send(msg)
+        
+        
+
 
         
 
