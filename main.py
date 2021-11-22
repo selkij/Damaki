@@ -12,6 +12,7 @@ from Commands.Miscellanous.voice import Join, Leave
 from Commands.Moderation.info import Info
 from Commands.Moderation.kick import Kick
 from Commands.Moderation.warn import Warn, Warns
+from Commands.Moderation.logs import Logs
 
 load_dotenv('config.env')
 
@@ -39,5 +40,6 @@ bot.add_cog(Kick(bot))
 bot.add_cog(Info(bot))
 bot.add_cog(Join(bot))
 bot.add_cog(Leave(bot))
+bot.add_cog(Logs(bot, db))
 
 bot.run(os.getenv('DISCORD_TOKEN'))
